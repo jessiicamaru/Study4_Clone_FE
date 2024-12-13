@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: #000;
+    background-color: #fff;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --button-color: #298ba8;
+    --white: #fff;
+    --button-primary-color: #35509a;
+    --header-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.2);
+    --social-icon: #677788;
+    --hastag-bg-color: #f0f8ff;
+    --test-bg-color: #f8f9fa;
+}
+
+* {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+#lbdict_frame_view {
+    display: inline-block;
+}
