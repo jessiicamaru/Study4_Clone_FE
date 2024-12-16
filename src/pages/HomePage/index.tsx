@@ -4,6 +4,7 @@ import DefaultLayout from '../../layouts/DefaultLayout';
 
 import { TestProps } from '../../props/props';
 import { CheckOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
     const fakeData: TestProps[] = [
@@ -89,6 +90,12 @@ function HomePage() {
         },
     ];
 
+    const navigate = useNavigate();
+
+    const handleNavigateLevelTest = () => {
+        navigate('/courses/level-test');
+    };
+
     return (
         <DefaultLayout>
             <div className="w-full">
@@ -96,7 +103,7 @@ function HomePage() {
             </div>
 
             <div className="w-4/5 mx-auto">
-                <div className="w-full flex justify-center p-8">
+                <div className="w-full flex justify-center p-8 cursor-pointer" onClick={handleNavigateLevelTest}>
                     <img src="/home/2.webp" alt="" className="w-full" />
                 </div>
 

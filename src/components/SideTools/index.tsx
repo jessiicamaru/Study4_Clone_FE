@@ -1,9 +1,8 @@
 import { UpOutlined, CloseOutlined } from '@ant-design/icons';
 import clsx from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function SideTools() {
-    const upArrow = useRef<HTMLLIElement>(null);
     const [visible, setVisible] = useState(false);
     const [tool, setTool] = useState('https://m.dict.laban.vn/');
     const [active, setActive] = useState(1);
@@ -83,7 +82,6 @@ function SideTools() {
                         className={clsx('hover:opacity-80 cursor-pointer flex justify-center flex-wrap w-full p-1.5', {
                             hidden: !visible,
                         })}
-                        ref={upArrow}
                         onClick={scrollToTop}
                     >
                         <UpOutlined className="text-[10px]" />
