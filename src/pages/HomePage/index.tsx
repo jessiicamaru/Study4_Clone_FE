@@ -111,8 +111,8 @@ function HomePage() {
                     <h1 className="font-bold text-[26px] text-center mb-3">Đề thi mới nhất</h1>
 
                     <div className="w-full flex flex-wrap gap-y-2">
-                        {fakeData.map((item) => {
-                            return <TestItem key={item.id} {...item} />;
+                        {fakeData.map((i) => {
+                            return <TestItem key={i.id} {...i} />;
                         })}
                     </div>
                 </div>

@@ -35,7 +35,7 @@ function LevelTest() {
             const response = await axios.get(`http://localhost:3000/api/v1/level-test?subject=${subject}&name=${name}&phone=${phone}&city=${city}`);
 
             console.log(response.data);
-            navigate('/courses/level-test/basic-english-test', { state: { data: response.data } });
+            navigate('/courses/level-test/basic-english-test', { state: { data: response.data, info: { name, phone, city, subject } } });
         } catch {
             console.log('error');
         }
