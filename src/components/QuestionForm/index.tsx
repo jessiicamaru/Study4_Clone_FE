@@ -37,6 +37,7 @@ function QuestionForm({ data, state }: { data: Question; state: QuestionProps[] 
                     id: data.QuestionID,
                     order: data.OrderNumber,
                     content: data.Question,
+                    partOrder: data.PartOrder,
                 },
             })
         );
@@ -134,7 +135,7 @@ function QuestionForm({ data, state }: { data: Question; state: QuestionProps[] 
                     block: data.AudioPath,
                 })}
             >
-                <audio autoPlay src={data.AudioPath} preload="metadata" ref={audioRef} />
+                <audio src={data.AudioPath} preload="metadata" ref={audioRef} />
                 <div className="flex w-4/5">
                     <div className="h-8 flex justify-center items-center cursor-pointer hover:bg-[var(--button-bg)]" onClick={handleClickPlay}>
                         <CaretRightFilled
@@ -155,7 +156,7 @@ function QuestionForm({ data, state }: { data: Question; state: QuestionProps[] 
                         defaultValue={'100%'}
                         className="flex-auto appearance-auto w-full"
                         onChange={handleChangeTimeline}
-                        value={timeline}
+                        value={String(timeline)}
                         step={0.5}
                         min={0}
                         max={100}

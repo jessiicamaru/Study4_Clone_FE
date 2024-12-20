@@ -5,7 +5,10 @@ export type QuestionProps = {
     correctAnswer?: string; // answerID
     choosenAnswer?: string; // answerID
     answerValue?: string;
+    audioPath?: string;
+    imagePath?: string;
     answerContent?: string;
+    partOrder: number;
 };
 
 export type AnswerProps = {
@@ -17,5 +20,4 @@ export type AnswerProps = {
 
 export type BasicEnglishProps = {
     question: QuestionProps[];
-    answer: AnswerProps[];
 };

@@ -1,20 +1,24 @@
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DefaultLayout from '../../../layouts/DefaultLayout';
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import QuestionForm from '../../../components/QuestionForm';
-import { GeneralTestReturnedInformation } from '../../../props/props';
+import { GeneralTestReturnedInformation, Info } from '../../../props/props';
 
 import { useSelector } from 'react-redux';
 import { questionBasicEnglishTestSelectors } from '../../../redux/selectors';
 import axios from '../../../config/axios';
+import { useDispatch } from 'react-redux';
+import { BasicEnglishSlice } from '../../../slice/BasicEnglishSlice';
 
 function BasicEnglishPage() {
     const location = useLocation();
-    const { data, info }: { data: GeneralTestReturnedInformation; info: { name: string; phone: string; city: string; subject: string } } =
-        location.state;
+    const navigate = useNavigate();
+    const { data, info }: { data: GeneralTestReturnedInformation; info: Info } = location.state;
     // console.log(data);
+
+    const dispatch = useDispatch();
 
     const processRef = useRef<HTMLDivElement | null>(null);
     const [order, setOrder] = useState(0);
@@ -39,22 +43,46 @@ function BasicEnglishPage() {
         setOrder(order - 1);
     };
 
+    useEffect(() => {
+        if (data && Object.keys(data).length > 0) {
+            const correctAnswer = data.Question.map((i) => {
+                const answer = i.Answer.find((answer) => answer.IsCorrect == 1);
+                return {
+                    id: i.QuestionID,
+                    order: i.OrderNumber,
+                    content: i.Question,
+                    answerValue: answer?.AnswerValue,
+                    correctAnswer: answer?.AnswerID,
+                    partOrder: i.PartOrder,
+                    imagePath: i.ImagePath,
+                    audioPath: i.AudioPath,
+                };
+            });
+
+            dispatch(
+                BasicEnglishSlice.actions.setCorrectAnswer({
+                    question: correctAnswer,
+                })
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data]);
+
     const submit = async () => {
         try {
-            console.log({
-                info,
-                answer: state,
-                time,
-            });
             const response = await axios.post('http://localhost:3000/api/v1/level-test/get-score', {
                 data: {
                     info,
                     answer: state,
                     time,
+                    timeOfExam: String(data.TimeOfExam),
+                    maxScore: String(data.ExamMaxScore),
                 },
             });
 
             console.log({ res: response.data });
+
+            navigate('/courses/level-test/basic-english-test/get-score', { state: { data: response.data } });
         } catch (e) {
             console.log(e);
         }
@@ -92,9 +120,9 @@ function BasicEnglishPage() {
 
                 <div className="w-full bg-white shadow-lg rounded-lg p-4">
                     <div className="w-full flex">
-                        <div className="text-[14px] font-bold px-1">{time}</div>
+                        <div className="text-[14px] font-bold px-1 w-12">{time}</div>
                         <div className="text-[14px] font-bold px-1 flex flex-auto">
-                            <div className="w-12">{order < 10 ? '0' + (order + 1) : order + 1}/20</div>
+                            <div className="w-32">Câu hỏi {order < 10 ? '0' + (order + 1) : order + 1}/20</div>
                             <div className="w-full h-[21px] py-1">
                                 <div className="w-full h-full bg-[#f8fafd] rounded-full overflow-hidden">
                                     <div

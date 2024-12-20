@@ -24,6 +24,7 @@ export type Question = {
     AudioPath?: string;
     ImagePath?: string;
     OrderNumber: number;
+    PartOrder: number;
     Answer: Answer[];
 };
 
@@ -36,4 +37,11 @@ export type GeneralTestReturnedInformation = {
     Parts: number;
 
     Question: Question[];
+};
+
+export type Info = {
+    name: string;
+    phone: string;
+    city: string;
+    subject: string;
 };

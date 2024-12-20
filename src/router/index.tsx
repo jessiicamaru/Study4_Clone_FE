@@ -3,6 +3,7 @@ import HomePage from '../pages/HomePage';
 import ErrorPage from '../pages/ErrorPage';
 import LevelTest from '../pages/LevelTest';
 import BasicEnglishPage from '../pages/TestPage/BasicEnglishPage';
+import GetScore from '../pages/TestPage/GetScore';
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
         path: '/courses/level-test/basic-english-test',
         errorElement: <ErrorPage />,
         element: <BasicEnglishPage />,
+    },
+    {
+        path: '/courses/level-test/basic-english-test/get-score',
+        errorElement: <ErrorPage />,
+        element: <GetScore />,
     },
     {
         path: '*',
